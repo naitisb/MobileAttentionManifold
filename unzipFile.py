@@ -1,12 +1,21 @@
 from zipfile import ZipFile
-from urllib.request import urlopen   
+from urllib.request import urlopen
 import pandas as pd
 import os
 
+def download_url(url, save_path):
+    with urlopen(url) as dl_file:
+        with open(save_path, 'wb') as out_file:
+            out_file.write(dl_file.read())
+
 URL = 'https://datasets.d2.mpi-inf.mpg.de/MobileHCI2018/MPIIMobileAttention.zip'
+
+download_url(URL, '../MPIIMobileAttention.zip')
+
+
 # open and save the zip file onto computer
 url = urlopen(URL)
-output = open('MPIIMobileAttention.zip', 'wb')    # note the flag:  "wb"        
+output = open('./MPIIMobileAttention.zip', 'wb')    # note the flag:  "wb"        
 output.write(url.read())
 output.close()
 
