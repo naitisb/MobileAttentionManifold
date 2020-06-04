@@ -3,7 +3,7 @@ import numpy as np
 import seaborn as sn
 import matplotlib.pyplot as plt
 
-def proximityMatrix(model, X, normalize=True):
+def proximityMatrix(model, X):
 
     terminals = model.apply(X)
     nTrees = terminals.shape[1]
@@ -15,7 +15,7 @@ def proximityMatrix(model, X, normalize=True):
         a = terminals[:,i]
         proxMat += 1*np.equal.outer(a, a)
 
-    if normalize:
+    # to normalize:
         proxMat = proxMat / nTrees
 
     return proxMat
