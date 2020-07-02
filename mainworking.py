@@ -133,7 +133,7 @@ y_pred = clf.predict(X_test)
 pre_score = precision_score(y_test, y_pred)
 re_score= recall_score(y_test, y_pred)
 f1_score = f1_score(y_test, y_pred)
-print('F1 score: ' + f1_score)
+print('F1 score: ', f1_score)
 
 """
 precision, recall, threshold = precision_recall_curve(y_test, y_pred)
@@ -150,9 +150,21 @@ plt.title('2-class Precision-Recall curve: AP={0:0.2f}'.format(average_precision
 
 from proximityMatrix import proximityMatrix
 
-proxMat = proximityMatrix(clf, X_train, normalize=True)
+proxMat = proximityMatrix(clf, X_train)
 
 print("proxMat: \n", proxMat)
+
+
+from sklearn.manifold import TSNE
+
+embeddedModel = TSNE(n_components=2).fit_transform(proxMat)
+
+print(embeddedModel.shape)
+
+embeddedModel_ = TSNE(n_components=6).fit_transform(proxMat)
+
+print(embeddedModel_.shape)
+
 
 from mds import mds, square_points
 
